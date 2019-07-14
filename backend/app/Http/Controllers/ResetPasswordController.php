@@ -65,7 +65,7 @@ class ResetPasswordController extends Controller
     public function successResponse()
     {
         return response()->json([
-            'data' => 'Reset Email is send successfully, please check your inbox.'
+            'data' => 'Reset Email is sent successfully, please check your inbox.'
         ], Response::HTTP_OK);
     }
 }

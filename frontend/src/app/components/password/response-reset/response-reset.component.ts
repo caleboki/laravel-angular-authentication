@@ -31,6 +31,9 @@ export class ResponseResetComponent implements OnInit {
      data => this.handleResponse(data),
      error => this.handleError(error)
    )
+   this.form.email = null
+   this.form.password = null
+   this.form.password_confirmation = null
   }
   handleResponse(data){
 
