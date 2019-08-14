@@ -23,4 +23,8 @@ export class JarwisService {
     return this.http.post(`${this.baseUrl}/resetPassword`, data)
   }
 
+  testSpecial() {
+    return this.http.get(`${this.baseUrl}/special`)
+  }
+
 }

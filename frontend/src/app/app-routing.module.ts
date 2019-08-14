@@ -7,6 +7,7 @@ import { RequestResetComponent } from './components/password/request-reset/reque
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { AfterLoginService } from './services/after-login.service';
 import { BeforeLoginService } from './services/before-login.service';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,11 @@ const routes: Routes = [
     path: 'response-password-reset',
     component: ResponseResetComponent,
     canActivate: [BeforeLoginService]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AfterLoginService]
   },
 ];
 

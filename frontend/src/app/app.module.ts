@@ -11,11 +11,13 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JarwisService } from './services/jarwis.service';
 import { BeforeLoginService } from './services/before-login.service';
 import { AfterLoginService } from './services/after-login.service';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { AdminComponent } from './components/admin/admin.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     SignupComponent,
     ProfileComponent,
     RequestResetComponent,
-    ResponseResetComponent
+    ResponseResetComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +37,22 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     HttpClientModule,
     SnotifyModule
   ],
-  providers: [JarwisService, BeforeLoginService, AfterLoginService,
-              { provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService],
+  providers: [
+    JarwisService, 
+    BeforeLoginService, 
+    AfterLoginService,
+    { 
+      provide: 'SnotifyToastConfig', 
+      useValue: ToastDefaults,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    
+    SnotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

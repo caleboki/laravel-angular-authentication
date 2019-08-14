@@ -51,6 +51,15 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
+    public function special()
+    {
+        if (\Gate::allows('isAdmin'))
+        {
+            return response()->json('Access Granted');
+        }
+        return response()->json('Access Denied! You are not Admin');
+    }
+
     /**
      * Log the user out (Invalidate the token).
      *
